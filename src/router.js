@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import About from './views/About.vue';
 
 import Search from './views/Search.vue';
 
@@ -16,11 +15,6 @@ export default new Router({
       component: Search,
     },
     
-    {
-      path: '/about',
-      name: 'About',
-      component: About,
-    },
    
   ],
 });
