@@ -1,6 +1,8 @@
+
+
 <template>
   <div class="home">
-    <h1>vueapp</h1>
+    <h1>vueapp s</h1>
   </div>
 </template>
 
