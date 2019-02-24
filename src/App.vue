@@ -13,8 +13,10 @@
         <Claim v-if="step === 0" />
         <SearchInput :value="searchValue" v-model="searchValue" @input="handleInput" :dark="step === 1" />
         <div class="results" v-if="results && !loading && step === 1" >
-           <Item  v-for="item in results" :item="item" :key="item.data[0].nasa_id" />
+            <Item v-for="item in results" :item="item" :key="item.data[0].nasa_id" @click.native="handleModalOpen(item)" />
         </div>
+         <div class="loader" v-if="step === 1 && loading" />
+        <Modal v-if="modalOpen" :item="modalItem" @closeModal="modalOpen = false" />
     </div>
 
 
@@ -28,6 +30,7 @@ import HeroImage from '@/components/HeroImage';
 import Claim from '@/components/Claim';
 import SearchInput from '@/components/SearchInput';
 import Item from '@/components/Item';
+import Modal from '@/components/Modal';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 
@@ -35,9 +38,11 @@ const API = 'https://images-api.nasa.gov';
 
 export default {
   name: 'App',
-  components: { Claim, SearchInput, HeroImage, Item},
+  components: { Claim, SearchInput, HeroImage, Item, Modal},
   data(){
       return {
+          modalOpen: false,
+            modalItem: null,
           loading: false,
           step: 0,
           searchValue: '',
@@ -45,6 +50,10 @@ export default {
       }
   },
   methods: {
+     handleModalOpen(item) {
+      this.modalOpen = true;
+      this.modalItem = item;
+    },
       handleInput: debounce(function() {
       this.loading = true;
            axios.get(`${API}/search?q=${this.searchValue}&media_type=image`)
@@ -121,4 +130,39 @@ body{
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
+
+.loader {
+  margin-top: 100px;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  @media (min-width: 768px) {
+    width: 90px;
+    height: 90px;
+  }
+}
+.loader:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid #1e3d4a;
+  border-color: #1e3d4a transparent #1e3d4a transparent;
+  animation: loading 1.2s linear infinite;
+  @media (min-width: 768px) {
+    width: 90px;
+    height: 90px;
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 </style>
