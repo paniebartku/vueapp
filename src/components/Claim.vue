@@ -1,24 +1,49 @@
 <template>
-    <div class="wrapper">
-        <h1 class="header">Khronos</h1>
-        <p class="description">In the light of a young moon
+    <div class="claimWrapper">
+        <h1 class="claimHeader">Khronos</h1>
+        <p class="claimDescription">In the light of a young moon
 The cold dark night becomes scary soon
 A thorn in my soul your face fade away
 Awake like an owl for salvation I pray</p>
-        <p class="description">A thorn in my soul your face fade away
+        <p class="claimDescription">A thorn in my soul your face fade away
 Awake like an owl for salvation I pray</p>
      </div>
 </template>
+
+
 <script>
 export default {
-    name: "Claim"
-}
+  name: 'Claim',
+};
 </script>
+
+
 <style lang="scss" scoped>
-.wrapper {
+.claimWrapper {
     display: flex;
     flex-direction: column;
     justify-content:center;
     align-items: center;
+    color: white;
+    width: 70%;
+    text-align: center;
+}
+
+.claimHeader {
+    font-size: 2rem;
+    text-transform: uppercase;
+    @media(min-width:768px){
+        font-size: 5rem;
+        letter-spacing: 3px;
+    }
+}
+.claimDescription {
+    font-size:1.4rem;
+    margin:2rem 0 0 0;
+    line-height: 1.4;
+    font-weight: 300;
+    @media(min-width: 768px){
+        font-size: 1.6rem;
+    }
 }
 </style>
