@@ -1,5 +1,8 @@
 # vueapp
 
+Thank you, Roman.
+
+
 ## Project setup
 ```
 npm install
